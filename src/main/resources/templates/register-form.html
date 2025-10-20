@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>user Registration Form</title>
+    <style type="text/css">
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+div[align="center"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+    </style>
+</head>
+<body>
+<div align="center">
+    <div style="border-style:solid; width:500px">
+        <h1>User registration</h1>
+        <form role="form" method="post" th:action ="@{/register/save}" th:object = "${userForm}">
+            <label>Full name:</label>
+            <input thype="text" th:field = "*{name}">
+            <br>
+            <label>E-mail</label>
+            <input type="email" th:field = "*{email}">
+            <br>
+            <label>Password</label>
+            <input type="password" th:field = "*{password}">
+            <br>
+            <label>Gender</label>
+            <input type="radio" th:field = "*{gender}" value="Male"/> Male
+            <input type="radio" th:field = "*{gender}" value="Female"/> Female
+            <br>
+            <label>Profession</label>
+            <select th:field ="*{profession}">
+                <option th:each = "p : ${ListProfession}" th:value="${p}" th:text="${p}"></option>
+            </select>
+            <br>
+            <label>Address</label>
+            <textarea rows="5" cols="25" th:field="*{address}"></textarea>
+            <br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
