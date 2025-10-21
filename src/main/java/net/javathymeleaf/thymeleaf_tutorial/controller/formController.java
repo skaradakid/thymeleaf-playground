@@ -4,6 +4,8 @@ import net.javathymeleaf.thymeleaf_tutorial.model.UserForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.model.IModel;
 
 import java.sql.Struct;
@@ -22,5 +24,12 @@ public class formController {
         List<String> listProfession = Arrays.asList("Developer", "Tester", "Architect");
         model.addAttribute("ListProfession", listProfession);
         return "register-form";
+    }
+
+    // handler method to handle user registration request
+    @PostMapping("/register/save")
+    public String submitForm(Model model, @ModelAttribute("userForm") UserForm userForm){
+        model.addAttribute("userForm", userForm);
+        return "register-success";
     }
 }
